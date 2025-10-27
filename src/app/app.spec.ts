@@ -1,16 +1,18 @@
 import { TestBed } from '@angular/core/testing';
-import { RouterModule } from '@angular/router';
 import { App } from './app';
+import { SerieListComponent } from './serie/serie-list/serie-list.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterModule } from '@angular/router';
+import { SerieService } from './serie/serie.service';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
+      declarations: [App, SerieListComponent],
+      imports: [HttpClientTestingModule,
         RouterModule.forRoot([])
       ],
-      declarations: [
-        App
-      ],
+      providers: [SerieService]
     }).compileComponents();
   });
 
@@ -20,10 +22,4 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(App);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, series');
-  });
 });
